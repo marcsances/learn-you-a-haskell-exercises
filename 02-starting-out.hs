@@ -17,7 +17,7 @@ penultimate l = last (init l)
 findK k l = l !! k
 
 -- Determine if list l is a palindrome
-isPalindrome l = (l == reverse(l))
+isPalindrome l = l == reverse(l)
 
 {-
  - Duplicate the elements in list xs, for example "duplicate [1,2,3]" would give the list [1,1,2,2,3,3]
@@ -33,7 +33,7 @@ duplicate xs = concat [[x,x] | x <- xs]
  - The function "min x y" returns the lower of values x and y
  - For example "ziplike [1,2,3] ['a', 'b', 'c', 'd']" returns [(1,'a'), (2, 'b'), (3, 'c')]
  -}
-ziplike xs ys = [ (xs !! x, ys !! x) | x<-[0..((min (length xs) (length ys))-1)]]
+ziplike xs ys = [ (xs !! x, ys !! x) | x<-[0..(min (length xs) (length ys))-1]]
 
 -- Split a list l at element k into a tuple: The first part up to and including k, the second part after k
 -- For example "splitAtIndex 3 [1,1,1,2,2,2]" returns ([1,1,1],[2,2,2])
@@ -41,13 +41,13 @@ splitAtIndex k l = ( take k l, drop k l )
 
 -- Drop the element at index k in list l
 -- For example "dropK 3 [0,0,0,1,0,0,0]" returns [0,0,0,0,0,0]
-dropK k l = concat [(take k l),(drop (k+1) l)]
+dropK k l = concat [take k l,drop (k+1) l]
 dropK' k l = [ l !! x | x<-[0..(length l)-1], x/=k ]
 
 -- Extract elements between ith and kth element in list l. Including i, but not k
 -- For example, "slice 3 6 [0,0,0,1,2,3,0,0,0]" returns [1,2,3]
 slice i k l = reverse (drop (k-i) (reverse (drop i l)))
-slice' i k l = [ l !! x | x<-[i..(k-1)]]
+slice' i k l = [ l !! x | x<-[i..k-1]]
 
 -- Insert element x in list l at index k
 -- For example, "insertElem 2 5 [0,0,0,0,0,0]" returns [0,0,0,0,0,2,0]
